@@ -14,17 +14,17 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post('users')
+  @Post('/users')
   createUser(@Body() createUserDto: CreateUserDto): UserResponseDto {
     return this.appService.createUser(createUserDto);
   }
 
-  @Get('users/:id')
+  @Get('/users/:id')
   findUser(@Param() findUserDto: FindUserDto): UserResponseDto {
     return this.appService.findUser({ id: Number(findUserDto.id) });
   }
 
-  @Patch('users/:id')
+  @Patch('/users/:id')
   updateUser(
     @Param() findUserDto: FindUserDto,
     @Body() updateUserDto: UpdateUserDto

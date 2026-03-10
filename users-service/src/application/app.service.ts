@@ -13,6 +13,7 @@ export class AppService {
       id: 1,
       email: createUserDto.email,
       name: createUserDto.name,
+      role: createUserDto.role,
     };
   }
 
@@ -21,6 +22,7 @@ export class AppService {
       id: Number(findUserDto.id),
       email: "test@example.com",  
       name: "Test User",
+      role: "user",
     };
   }
   
@@ -29,6 +31,7 @@ export class AppService {
       id: Number(findUserDto.id),
       email: updateUserDto.email,
       name: updateUserDto.name,
+      role: updateUserDto.role,
     };
   }  
 }
