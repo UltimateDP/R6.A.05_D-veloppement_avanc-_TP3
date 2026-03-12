@@ -16,10 +16,19 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('/ (GET) requires a token', () => {
     return request(app.getHttpServer())
       .get('/')
-      .expect(200)
-      .expect('Hello World!');
+      .expect(401);
+  });
+
+  it('/auth/login (POST) returns a JWT', () => {
+    return request(app.getHttpServer())
+      .post('/auth/login')
+      .send({ email: 'alice@test.com', password: 'secret123' })
+      .expect(201)
+      .expect(({ body }) => {
+        expect(body.access_token).toEqual(expect.any(String));
+      });
   });
 });
