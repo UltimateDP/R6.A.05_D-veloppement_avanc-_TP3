@@ -1,13 +1,14 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsEnum } from 'class-validator';
+import { OrderStatus } from '../../../domain/order-status.enum';
 
 export class CreateOrderDto {
     @IsNumber()
     @IsNotEmpty()
     userId: number;
 
-    @IsString()
+    @IsEnum(OrderStatus)
     @IsNotEmpty()
-    status: string;
+    status: OrderStatus;
 
     @IsNumber()
     @IsNotEmpty()
