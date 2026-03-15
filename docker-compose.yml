@@ -3,7 +3,7 @@ name: R5A06_DevAvancee_TP3
 services:
   orders-service:
     build:
-      context: orders-service
+      context: ./orders-service
       dockerfile: Dockerfile
     container_name: orders-service
     restart: unless-stopped
@@ -14,7 +14,7 @@ services:
 
   users-service:
     build:
-      context: users-service
+      context: ./users-service
       dockerfile: Dockerfile
     container_name: users-service
     restart: unless-stopped
@@ -25,7 +25,7 @@ services:
 
   api-gateway:
     build:
-      context: api-gateway
+      context: ./api-gateway
       dockerfile: Dockerfile
     container_name: api-gateway
     restart: unless-stopped

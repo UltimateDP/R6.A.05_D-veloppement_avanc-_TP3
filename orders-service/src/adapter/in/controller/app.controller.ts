@@ -5,29 +5,29 @@ import { UpdateOrderDto } from '../dto/update-order.dto';
 import { FindOrderDto } from '../dto/find-order.dto';
 import { OrderResponseDto } from '../dto/response-order.dto';
 
-@Controller()
+@Controller('orders')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) {} 
 
   @Get()
-  getHello(): string {
+  getHello() {
     return this.appService.getHello();
   }
 
-  @Post('orders')
+  @Post()
   createOrder(@Body() createOrderDto: CreateOrderDto): OrderResponseDto {
     return this.appService.createOrder(createOrderDto);
   }
 
-  @Get('orders/:id')
+  @Get(':id')
   findOrder(@Param() findOrderDto: FindOrderDto): OrderResponseDto {
     return this.appService.findOrder({ id: Number(findOrderDto.id) });
   }
 
-  @Patch('orders/:id')
+  @Patch(':id')
   updateOrder(
     @Param() findOrderDto: FindOrderDto,
-    @Body() updateOrderDto: UpdateOrderDto
+    @Body() updateOrderDto: UpdateOrderDto,
   ): OrderResponseDto {
     return this.appService.updateOrder({ id: Number(findOrderDto.id) }, updateOrderDto);
   }

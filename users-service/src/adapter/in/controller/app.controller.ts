@@ -5,29 +5,29 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 import { FindUserDto } from '../dto/find-user.dto';
 import { UserResponseDto } from '../dto/reponse-user.dto';
 
-@Controller()
+@Controller('users')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
+  getHello() {
     return this.appService.getHello();
   }
 
-  @Post('/users')
+  @Post()
   createUser(@Body() createUserDto: CreateUserDto): UserResponseDto {
     return this.appService.createUser(createUserDto);
   }
 
-  @Get('/users/:id')
+  @Get(':id')
   findUser(@Param() findUserDto: FindUserDto): UserResponseDto {
     return this.appService.findUser({ id: Number(findUserDto.id) });
   }
 
-  @Patch('/users/:id')
+  @Patch(':id')
   updateUser(
     @Param() findUserDto: FindUserDto,
-    @Body() updateUserDto: UpdateUserDto
+    @Body() updateUserDto: UpdateUserDto,
   ): UserResponseDto {
     return this.appService.updateUser({ id: Number(findUserDto.id) }, updateUserDto);
   }
