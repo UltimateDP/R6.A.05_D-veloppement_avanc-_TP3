@@ -11,55 +11,69 @@ import { AxiosError } from 'axios';
 export class UsersService {
     constructor(private readonly httpService: HttpService) {}
 
-    async getHello() {
+    async create(body: any, authHeader?: string) {
         try {
         const response = await firstValueFrom(
-            this.httpService.get('http://orders-service:3001/orders'),
+            this.httpService.post('http://users-service:3002/users', body, {
+            headers: authHeader ? { Authorization: authHeader } : {},
+            }),
         );
         return response.data;
         } catch (error) {
         const err = error as AxiosError;
         if (err.response) {
-            throw new HttpException(
-            err.response.data as any,
-            err.response.status,
-            );
+            throw new HttpException(err.response.data as any, err.response.status);
         }
-        throw new InternalServerErrorException('Orders service unavailable');
+        throw new InternalServerErrorException('Users service unavailable');
         }
     }
 
-    async create(body: any, authHeader?: string) {
+    async login(body: { email: string; password: string }) {
         try {
-            const response = await firstValueFrom(
-                this.httpService.post('http://users-service:3002/users', body, {
-                headers: authHeader ? { Authorization: authHeader } : {},
-                }),
-            );
-            return response.data;
+        const response = await firstValueFrom(
+            this.httpService.post('http://users-service:3002/users/login', body),
+        );
+        return response.data;
         } catch (error) {
-            const err = error as AxiosError;
-            if (err.response) {
-                throw new HttpException(err.response.data as any, err.response.status);
-            }
-            throw new InternalServerErrorException('Users service unavailable');
+        const err = error as AxiosError;
+        if (err.response) {
+            throw new HttpException(err.response.data as any, err.response.status);
+        }
+        throw new InternalServerErrorException('Users service unavailable');
         }
     }
 
-    async find(id: string) {
+    async find(id: string | number, authHeader?: string) {
         try {
-            const response = await firstValueFrom(
-                this.httpService.get(`http://users-service:3001/users/${id}`),
-            );
-            return response.data;
+        const response = await firstValueFrom(
+            this.httpService.get(`http://users-service:3002/users/${id}`, {
+            headers: authHeader ? { Authorization: authHeader } : {},
+            }),
+        );
+        return response.data;
         } catch (error) {
-            const err = error as AxiosError;
-            if (err.response) {
-                throw new HttpException(err.response.data as any, err.response.status);
-            }
-            throw new InternalServerErrorException('Users service unavailable');
+        const err = error as AxiosError;
+        if (err.response) {
+            throw new HttpException(err.response.data as any, err.response.status);
+        }
+        throw new InternalServerErrorException('Users service unavailable');
         }
     }
 
-
+    async update(id: string | number, body: any, authHeader?: string) {
+        try {
+        const response = await firstValueFrom(
+            this.httpService.patch(`http://users-service:3002/users/${id}`, body, {
+            headers: authHeader ? { Authorization: authHeader } : {},
+            }),
+        );
+        return response.data;
+        } catch (error) {
+        const err = error as AxiosError;
+        if (err.response) {
+            throw new HttpException(err.response.data as any, err.response.status);
+        }
+        throw new InternalServerErrorException('Users service unavailable');
+        }
+    }
 }

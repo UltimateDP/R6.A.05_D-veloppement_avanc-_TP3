@@ -12,7 +12,7 @@ export class CreateOrderDto {
     userId: number;
 
     @ApiProperty({
-        example: 'CREATED',
+        example: 'PENDING',
         description: 'Statut de la commande',
     })
     @IsEnum(OrderStatus)

@@ -16,10 +16,6 @@ export class AppService {
     },
   ];
 
-  getHello(): string {
-    return 'Hello World!';
-  }
-
   createUser(createUserDto: CreateUserDto): UserResponseDto {
     const user: StoredUser = {
       id: this.users.length + 1,

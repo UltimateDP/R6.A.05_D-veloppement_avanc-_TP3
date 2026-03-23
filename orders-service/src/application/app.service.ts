@@ -5,9 +5,6 @@ import { OrderStatus } from '../domain/order-status.enum';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
-  }
 
   createOrder(createOrderDto: CreateOrderDto): OrderResponseDto {
     return {

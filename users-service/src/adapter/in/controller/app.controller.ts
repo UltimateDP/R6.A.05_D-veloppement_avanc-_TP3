@@ -9,11 +9,6 @@ import { UserResponseDto } from '../dto/reponse-user.dto';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello() {
-    return this.appService.getHello();
-  }
-
   @Post()
   createUser(@Body() createUserDto: CreateUserDto): UserResponseDto {
     return this.appService.createUser(createUserDto);

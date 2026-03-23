@@ -182,7 +182,7 @@ Invoke-RestMethod -Method Post `
 -Uri "http://localhost:3001/orders" `
 -Headers @{ Authorization = "Bearer $token" } `
 -ContentType "application/json" `
--Body '{"userId":1,"status":"CREATED","totalAmount":99.99}'
+-Body '{"userId":1,"status":"PENDING","totalAmount":99.99}'
 ```
 
 #### Récupérer une commande
@@ -224,7 +224,7 @@ Invoke-RestMethod -Method Post `
 -Uri "http://localhost:3000/orders" `
 -Headers @{ Authorization = "Bearer $token" } `
 -ContentType "application/json" `
--Body '{"userId":1,"status":"CREATED","totalAmount":99.99}'
+-Body '{"userId":1,"status":"PENDING","totalAmount":99.99}'
 ```
 
 #### Récupérer une commande via la Gateway
